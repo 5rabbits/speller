@@ -11,6 +11,7 @@ class Speller
   def self.check(words, lang, max_suggestions = 10)
     return if words.nil?
     lang = 'es' unless %w(es en pt).include?(lang)
+    lang = 'pt-br' if lang == 'pt'
     speller = FFI::Aspell::Speller.new(lang)
     pos = 0
     words.split.map do |word|
