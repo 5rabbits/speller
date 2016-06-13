@@ -2,7 +2,7 @@ require 'sinatra'
 require 'ffi/aspell'
 require 'json'
 
-get '/spell' do
+post '/spell' do
   Speller.check(params[:text], params[:lang]).to_json
 end
 

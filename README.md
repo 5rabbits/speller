@@ -26,3 +26,20 @@ sudo apt-get install aspell aspell-en aspell-es aspell-pt-br
 bundle install
 ruby speller.rb
 ```
+
+## Endpoints
+
+To consume the service, you could post ```[ROOT_URL]/spell``` endpoint, with the following params:
+
+- text: Is the text you want to spellcheck.
+- lang: Is the code of the lang who are you testing text, for example ```es```.
+
+So, a full request could be:
+
+```[ROOT_URL]/spell?lang=en&text=Bla%20Bla%20Bla%20Bla```
+
+The response will be an array of possible suggestions:
+
+```
+[{"attrs":{"l":3,"o":0,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":4,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":8,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":12,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]}]
+```
