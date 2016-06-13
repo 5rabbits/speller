@@ -40,6 +40,40 @@ So, a full request could be:
 
 The response will be an array of possible suggestions:
 
+
 ```
-[{"attrs":{"l":3,"o":0,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":4,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":8,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]},{"attrs":{"l":3,"o":12,"s":1},"suggestions":["Bela","Blah","Bola","Bl","Blab","Blag","Blat","BA","Ba","LA"]}]
+#!json
+
+[
+	{
+		"attrs": {
+			"l": 3,
+			"o": 0,
+			"s": 1
+		},
+		"suggestions": ["Bela", "Blah", "Bola", "Bl", "Blab", "Blag", "Blat", "BA", "Ba", "LA"]
+	},
+	{
+		"attrs": {
+			"l": 3,
+			"o": 4,
+			"s": 1
+		},
+		"suggestions": ["Bela", "Blah", "Bola", "Bl", "Blab", "Blag", "Blat", "BA", "Ba", "LA"]
+	}, {
+		"attrs": {
+			"l": 3,
+			"o": 8,
+			"s": 1
+		},
+		"suggestions": ["Bela", "Blah", "Bola", "Bl", "Blab", "Blag", "Blat", "BA", "Ba", "LA"]
+	}, {
+		"attrs": {
+			"l": 3,
+			"o": 12,
+			"s": 1
+		},
+		"suggestions": ["Bela", "Blah", "Bola", "Bl", "Blab", "Blag", "Blat", "BA", "Ba", "LA"]
+	}
+]
 ```
