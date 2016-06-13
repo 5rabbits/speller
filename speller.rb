@@ -1,6 +1,26 @@
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'ffi/aspell'
 require 'json'
+
+configure do
+  set :bind, '0.0.0.0'
+  enable :cross_origin
+end
+
+options '*' do
+  response.headers['Allow'] = 'HEAD,GET,PUT,POST,DELETE,OPTIONS'
+  allowed_headers = [
+    'X-Requested-With',
+    'X-HTTP-Method-Override',
+    'Content-Type',
+    'Cache-Control',
+    'Accept'
+  ].join(',')
+
+  response.headers['Access-Control-Allow-Headers'] = allowed_headers
+  200
+end
 
 post '/spell' do
   Speller.check(params[:text], params[:lang]).to_json
