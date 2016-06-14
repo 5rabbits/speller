@@ -1,29 +1,20 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/cross_origin'
 require 'ffi/aspell'
 require 'json'
 
-configure do
-  set :bind, '0.0.0.0'
-  enable :cross_origin
-end
+class SpellerApp < Sinatra::Base
+  register Sinatra::CrossOrigin
 
-options '*' do
-  response.headers['Allow'] = 'HEAD,GET,PUT,POST,DELETE,OPTIONS'
-  allowed_headers = [
-    'X-Requested-With',
-    'X-HTTP-Method-Override',
-    'Content-Type',
-    'Cache-Control',
-    'Accept'
-  ].join(',')
+  configure do
+    set :allow_origin, :any
+    set :bind, '0.0.0.0'
+    enable :cross_origin
+  end
 
-  response.headers['Access-Control-Allow-Headers'] = allowed_headers
-  200
-end
-
-post '/spell' do
-  Speller.check(params[:text], params[:lang]).to_json
+  get '/spell' do
+    Speller.check(params[:text], params[:lang]).to_json
+  end
 end
 
 # A class used to use aspell to spellcheck a text
@@ -51,3 +42,5 @@ class Speller
     { attrs: { l: word.length, o: pos, s: 1 }, suggestions: suggestions }
   end
 end
+
+SpellerApp.run!
