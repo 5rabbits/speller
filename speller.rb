@@ -12,7 +12,7 @@ class SpellerApp < Sinatra::Base
     enable :cross_origin
   end
 
-  get '/spell' do
+  post '/spell' do
     Speller.check(params[:text], params[:lang]).to_json
   end
 end
