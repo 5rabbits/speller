@@ -35,6 +35,7 @@ class Speller
   def self.correct_word(speller, word, max_suggestions, pos)
     return if speller.correct?(word)
     suggestions = speller.suggestions(word).first(max_suggestions)
+    suggestions.map! {|suggestion| suggestion.encode("UTF-8")}
     suggestions_to_hash(word, pos, suggestions)
   end
 
