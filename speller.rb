@@ -15,6 +15,11 @@ class SpellerApp < Sinatra::Base
   post '/spell' do
     Speller.check(params[:text], params[:lang]).to_json
   end
+
+  options '/spell' do
+    ""
+  end
+
 end
 
 # A class used to use aspell to spellcheck a text
