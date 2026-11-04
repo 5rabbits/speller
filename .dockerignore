@@ -1,3 +1,4 @@
 .git
 .bundle
 .ruby-lsp
+coverage

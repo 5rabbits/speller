@@ -10,6 +10,7 @@ Wednesday, November 4th
 * **Update** Reemplaza `sinatra-cross_origin` por headers CORS propios con los mismos valores
 * **New** Entorno de desarrollo con Podman compose en el puerto 3019 y Dev Container para Ruby LSP en VS Code
 * **New** Suite de tests con Minitest
+* **New** GitHub Action que corre los tests con cobertura (SimpleCov) en cada PR y en `master`
 
 ## Hotfix 17.0.4
 Monday, May 15th

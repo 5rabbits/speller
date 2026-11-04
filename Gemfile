@@ -26,4 +26,6 @@ group :test do
   gem 'rake', '~> 13.4'
   # Drives the Sinatra app in request tests
   gem 'rack-test', '~> 2.3'
+  # Coverage report, opt-in with COVERAGE=1 (see test/test_helper.rb)
+  gem 'simplecov', '~> 1.3', require: false
 end

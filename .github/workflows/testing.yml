@@ -1,0 +1,54 @@
+name: testing
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      # rerun, ruby-lsp and debug are only for the dev container
+      BUNDLE_WITHOUT: development
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # ffi-aspell loads libaspell at runtime and the suite checks against the
+      # real es/en/pt_BR dictionaries, the same ones the Dockerfile installs.
+      - name: Install Aspell and dictionaries
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libaspell-dev aspell-en aspell-es aspell-pt-br
+
+      # The Ruby version comes from .ruby-version
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run tests with coverage
+        env:
+          COVERAGE: '1'
+        run: bundle exec rake test
+
+      - name: Coverage summary
+        run: |
+          echo "### Coverage" >> "$GITHUB_STEP_SUMMARY"
+          echo "Line coverage: $(jq -r '.result.line' coverage/.last_run.json)%" >> "$GITHUB_STEP_SUMMARY"
+
+      # TODO SonarQube: once the project exists, fix the paths in
+      # coverage/.resultset.json (sed $GITHUB_WORKSPACE -> /github/workspace/)
+      # and run LemontechSA/action-sonarqube-scan, as in green-mario.
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage/
+          include-hidden-files: true

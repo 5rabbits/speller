@@ -30,7 +30,12 @@ Tests use Minitest + rack-test (`test/`) and need real Aspell dictionaries, so r
 podman compose run --rm speller bundle exec rake test                               # whole suite
 podman compose run --rm speller bundle exec rake test TEST=test/speller_app_test.rb  # one file
 podman compose run --rm speller bundle exec ruby -Itest test/speller_test.rb -n test_check_returns_nil_without_text  # one test
+podman compose run --rm -e COVERAGE=1 speller bundle exec rake test                 # with SimpleCov report in coverage/
 ```
+
+Coverage is opt-in (`COVERAGE=1`, as in timeflow). SimpleCov 1.x starts at the top of `test/test_helper.rb`, before `speller.rb` is required, and only covers `speller.rb` (`cover`; 1.x deprecates `track_files`/`add_filter`). `coverage/` is gitignored.
+
+CI: `.github/workflows/testing.yml` runs on every PR and on push to `master`. It installs Aspell and the dictionaries with apt, uses `ruby/setup-ruby` (version from `.ruby-version`), runs the suite with `COVERAGE=1`, writes line coverage to the job summary and uploads `coverage/` as an artifact (with `.resultset.json`). SonarQube isn't set up yet because the project doesn't exist; the workflow has a TODO where the scan goes.
 
 There is no linter config.
 

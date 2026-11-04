@@ -59,6 +59,15 @@ The suite uses Minitest and runs against the real Aspell dictionaries:
 podman compose run --rm speller bundle exec rake test
 ```
 
+To get a coverage report in `coverage/index.html`, set `COVERAGE=1`:
+
+```
+podman compose run --rm -e COVERAGE=1 speller bundle exec rake test
+```
+
+GitHub Actions runs the suite with coverage on every pull request and on
+pushes to `master` (`.github/workflows/testing.yml`).
+
 ## Endpoints
 
 To consume the service, you could post ```[ROOT_URL]/spell``` endpoint, with the following params:
