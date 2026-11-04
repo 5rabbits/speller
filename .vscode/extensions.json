@@ -1,0 +1,5 @@
+{
+  // Ruby LSP runs inside the dev container (.devcontainer/), not on the host
+  "recommendations": ["ms-vscode-remote.remote-containers"],
+  "unwantedRecommendations": ["Shopify.ruby-lsp"]
+}

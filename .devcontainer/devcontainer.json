@@ -1,0 +1,16 @@
+// Opens the project inside the compose `speller` container, so Ruby LSP (and
+// its test explorer) run with the container's Ruby, gems and Aspell.
+{
+  "name": "speller",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "speller",
+  "workspaceFolder": "/app",
+  // Keep the dev server running when VS Code closes; it is managed with
+  // `podman compose` as well.
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "extensions": ["Shopify.ruby-lsp"]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Development environment. The source tree is bind-mounted and rerun restarts
+# the server when a source file changes, so edits apply without a manual restart.
+# Gemfile changes need a rebuild: podman compose up --build
+#
+# The fixed project name lets the Dev Container (.devcontainer/) attach to the
+# same container instead of starting a second one that would clash on 3019.
+name: speller
+
+services:
+  speller:
+    build: .
+    image: localhost/speller:dev
+    ports:
+      - "3019:3019"
+    environment:
+      RACK_ENV: development
+    volumes:
+      - .:/app
